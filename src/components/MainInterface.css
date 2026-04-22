@@ -1,0 +1,197 @@
+.main-interface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.scroll-header {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.scroll-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-ink);
+  letter-spacing: 6px;
+  margin-bottom: 12px;
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.progress-text {
+  font-size: 13px;
+  color: var(--color-primary);
+}
+
+.progress-bar {
+  width: 120px;
+  height: 6px;
+  background: var(--color-paper-dark);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 3px;
+}
+
+.scroll-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 0 40px;
+  flex-wrap: wrap;
+}
+
+.step-card {
+  position: relative;
+}
+
+.step-button {
+  position: relative;
+  width: 140px;
+  padding: 24px 16px;
+  background: var(--color-paper);
+  border: 2px solid var(--color-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--color-shadow);
+  text-align: center;
+}
+
+.step-button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.step-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.step-button:not(:disabled):hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--color-shadow);
+}
+
+.step-card.current .step-button {
+  border-color: var(--color-accent);
+  background: linear-gradient(145deg, var(--color-paper), var(--color-secondary));
+}
+
+.step-card.completed .step-button {
+  border-color: var(--color-primary);
+  background: var(--color-paper-dark);
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 12px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-paper);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.step-card.current .step-number {
+  background: var(--color-accent);
+}
+
+.step-card.completed .step-number {
+  background: var(--color-ink);
+}
+
+.step-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: var(--color-primary);
+}
+
+.step-check,
+.step-arrow {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+}
+
+.step-check {
+  color: #4CAF50;
+}
+
+.step-arrow {
+  color: var(--color-accent);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.scroll-footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.scroll-decor .seal {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 3px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 14px;
+  letter-spacing: 4px;
+  transform: rotate(-3deg);
+}
+
+@media (max-width: 600px) {
+  .steps-container {
+    gap: 12px;
+    padding: 0 20px;
+  }
+  
+  .step-button {
+    width: 110px;
+    padding: 16px 12px;
+  }
+  
+  .step-name {
+    font-size: 14px;
+  }
+  
+  .scroll-title {
+    font-size: 20px;
+  }
+}
