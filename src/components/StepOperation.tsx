@@ -55,7 +55,7 @@ const OPERATION_CONFIGS: Record<string, OperationConfig> = {
 }
 
 export default function StepOperation({ step, onClose }: StepOperationProps) {
-  const { state, completeStep, markVideoWatched, canProceed } = useGame()
+  const { state, completeStep, markVideoWatched } = useGame()
   const [showVideo, setShowVideo] = useState(false)
   const [progress, setProgress] = useState(0)
   const [isOperating, setIsOperating] = useState(false)
@@ -96,22 +96,18 @@ export default function StepOperation({ step, onClose }: StepOperationProps) {
       case 'drag':
         return (
           <DragOperation
-            progress={progress}
             onProgress={handleProgress}
-            stepType={step.operationType}
           />
         )
       case 'paint':
         return (
           <PaintOperation
-            progress={progress}
             onProgress={handleProgress}
           />
         )
       case 'press':
         return (
           <PressOperation
-            progress={progress}
             onProgress={handleProgress}
             stepType={step.operationType}
           />
@@ -228,13 +224,9 @@ export default function StepOperation({ step, onClose }: StepOperationProps) {
 }
 
 function DragOperation({
-  progress,
   onProgress,
-  stepType,
 }: {
-  progress: number
   onProgress: (p: number) => void
-  stepType: string
 }) {
   const [position, setPosition] = useState(0)
   const [isDragging, setIsDragging] = useState(false)
@@ -285,17 +277,12 @@ function DragOperation({
         <div className="drag-target" style={{ left: `${getTargetPosition()}%` }}>
           目标位置
         </div>
-        <motion.div
+        <div
           className="drag-object"
           style={{ left: `${position}%` }}
-          animate={{ left: `${position}%` }}
-          drag="x"
-          dragConstraints={containerRef}
-          dragElastic={0}
-          dragMomentum={false}
         >
           📄
-        </motion.div>
+        </div>
       </div>
       <p className="operation-hint">拖动文件到目标位置</p>
     </div>
@@ -303,10 +290,8 @@ function DragOperation({
 }
 
 function PaintOperation({
-  progress,
   onProgress,
 }: {
-  progress: number
   onProgress: (p: number) => void
 }) {
   const [strokes, setStrokes] = useState<{ x: number; y: number }[]>([])
@@ -382,14 +367,13 @@ function PaintOperation({
 }
 
 function PressOperation({
-  progress,
   onProgress,
   stepType,
 }: {
-  progress: number
   onProgress: (p: number) => void
   stepType: string
 }) {
+  const progressRef = useRef(0)
   const [isPressing, setIsPressing] = useState(false)
   const pressTimerRef = useRef<number | null>(null)
 
@@ -409,7 +393,8 @@ function PressOperation({
   const handlePressStart = () => {
     setIsPressing(true)
     pressTimerRef.current = window.setInterval(() => {
-      onProgress(progress + 2)
+      progressRef.current += 2
+      onProgress(progressRef.current)
     }, 100)
   }
 

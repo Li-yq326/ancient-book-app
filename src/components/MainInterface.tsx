@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Step, useGame } from '../App'
+import { Step } from '../App'
 import './MainInterface.css'
 
 interface MainInterfaceProps {
@@ -10,7 +10,6 @@ interface MainInterfaceProps {
 }
 
 export default function MainInterface({ steps, currentStep, completedSteps, onStepClick }: MainInterfaceProps) {
-  const { state } = useGame()
 
   const getStepStatus = (stepId: number) => {
     if (completedSteps.includes(stepId)) return 'completed'

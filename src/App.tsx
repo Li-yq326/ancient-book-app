@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, createContext, useContext, ReactNode } from 'react'
+import { useState, useEffect, useCallback, createContext, useContext } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Main界面 from './components/MainInterface'
+import MainInterface from './components/MainInterface'
 import StepOperation from './components/StepOperation'
 import CloudCelebration from './components/CloudCelebration'
 import './App.css'
